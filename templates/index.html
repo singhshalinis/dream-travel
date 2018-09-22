@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Woosh to somewhere.</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto+Slab:400,700" rel="stylesheet">
+		<link href="./css/base.css" rel="stylesheet" />
+		
+		
+	</head>
+	<body>
+		<header>
+            <div class="title">My Bucket List</div>
+            <div class="err" data-bind="text: errorMessage"></div>
+        </header>
+		<section class="container">
+			<section class="left">
+				<article class="left-top row">
+					<div class="selection"> 
+						<div class="filter">
+							<input type="checkbox" value="all" data-bind="checked: selectAll, event: {change: function(data, event) {checkOrUncheckAll(data, event)}}" id="selectAllID">
+							<label for="selectAllID">Select All</label>
+						</div>
+					</div>
+					
+					<div data-bind="foreach: locations">
+						<div class="container row">
+							<input type="checkbox" name="places" data-bind="checked: s, attr: {'id': 'place' + $index()}"/>
+							<label data-bind="text: data.title, attr: {'for': 'place' + $index()}"></label>
+						</div>
+					</div>
+				</article>	
+			
+			
+                <article class="left-bottom row">
+                    <div data-bind="foreach: locations">
+						<div class="details container row" data-bind="visible: s">
+							<label class="row" data-bind="text: data.title"></label>
+                            <small class="row" data-bind="html: data.wiki"></small>
+                            <hr>
+						</div>
+					</div>
+                </article>
+            </section>
+			
+			<section class="right" id="map"></section>
+		</section>
+		
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+		<script type="text/javascript" src="./js/map.js"></script>
+        <script type="text/javascript" src="./js/mvc.js"></script>
+		<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=<GOOGLE MAPS API KEY>&callback=initMap">		
+        </script> 
+		
+		
+	</body>
+</html>
